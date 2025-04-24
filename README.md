@@ -118,3 +118,30 @@ The solver is implemented in TypeScript with these key components:
 2. Leave empty cells (or enter 0) for positions to be solved
 3. Click "Solve" to find the solution
 4. Use "Reset" to clear the board
+
+## Big O-notation
+(Big O-notation) of this Sudoku solver application is O(9^M), where M is the number of empty cells in the puzzle. Here's the detailed breakdown:
+
+Worst Case: O(9^M)
+
+For each empty cell, we try up to 9 different numbers
+In a completely empty board (M = 81), this leads to 9^81 possible combinations
+However, the actual runtime is much better due to constraint checking
+Space Complexity: O(M)
+
+O(1) for the board itself (modified in-place)
+O(M) for the recursion call stack
+M is the number of empty cells (maximum 81)
+Constraint Checking: O(1)
+
+isValid() function runs in constant time
+Checking row: O(9)
+Checking column: O(9)
+Checking 3x3 box: O(9)
+These are all constant regardless of input size
+The algorithm performs much better in practice than the theoretical worst case because:
+
+The constraint checking (isValid function) eliminates many invalid possibilities early
+Most real Sudoku puzzles have multiple given numbers, reducing M significantly
+The backtracking approach quickly abandons invalid solution paths
+This implementation is efficient for practical use as most Sudoku puzzles have 20-30 given numbers, making M much smaller than the theoretical maximum of 81.
